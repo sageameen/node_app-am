@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+  redis:
+    image: 'redis:alpine'
+    ports:
+      - '6379:6379'
+  web1:
+    restart: on-failure
+    build: ./web1
+    ports:
+      - '81:5000'
+
+  nginx:
+    image: 'nginx'
+    ports:
+      - '80:80'
+    depends_on:
+      - web1
+      
